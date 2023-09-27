@@ -1,0 +1,75 @@
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class Practice_80 {
+	
+	public static void printArray10PerLine(ArrayList<Integer> a) {
+		for(int i = 0; i < a.size(); i++) {
+			System.out.print(a.get(i) + "\t");
+			if((i + 1) % 10 == 0)
+				System.out.println();
+		}
+		System.out.println();
+	}
+	
+	public static ArrayList<Integer> getRandomList(int size, int range){
+		ArrayList<Integer> a = new ArrayList<>();
+		ArrayList<Integer> b = new ArrayList<>();
+		
+		for(int i = 0; i <= 100; i++) 
+			a.add(i);
+		Collections.shuffle(a);
+		for(int i = 0; i < size; i++) 
+			b.add(a.get(i));
+		
+		return b;
+	}
+	
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		
+		
+		
+		try {
+			System.out.print("난수값이 저장된 파일 이름을 입력하세요: ");
+			String fileName = sc.next();
+			FileReader fr = new FileReader(fileName);
+			
+			System.out.println("파일에서 난수를 읽어들입니다.");
+			
+			int ch;
+			
+			ArrayList<Integer> list = new ArrayList<>();
+			
+			while((ch = fr.read()) != -1) {
+				System.out.print(ch);
+				list.add(ch);
+			}
+			
+			System.out.println("난수의 개수는 " + list.size() + "개입니다.");
+			
+			System.out.println("입력된 난수는 다음과 같습니다.");
+			printArray10PerLine(list);
+			
+			ArrayList<Integer> sort = new ArrayList<>();
+			for(int i = 0; i < list.size(); i++) 
+				sort.add(list.get(i));
+			Collections.sort(sort);
+			
+			System.out.println("정렬된 난수 배열은 다음과 같습니다.");
+			printArray10PerLine(sort);
+
+			fr.close();
+			sc.close();
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+}

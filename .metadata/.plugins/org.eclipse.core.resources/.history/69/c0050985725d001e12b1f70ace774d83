@@ -1,0 +1,77 @@
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Practice_81 {
+	
+	public static void load(String fname, ArrayList<BankAccount> list) {
+		try {
+			FileReader fr = new FileReader(fname);
+			
+			
+			for(int i = 0; i < list.size(); i++) {
+				list.add(new BankAccount());
+				fr.write(Integer.toString(arr[i]) + "\t");
+				if((i + 1) % 10 == 0)
+					fw.write("\n");
+			}
+			
+			int ch;
+			while((ch = fr.read()) != -1) {
+				list.add(new BankAccount());
+			}
+				System.out.print((char)ch);
+			System.out.println();
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}	
+	}
+	
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		ArrayList<BankAccount> list = new ArrayList<>();
+		for(int i = 0; i < 3; i++)
+			list.add(new BankAccount());
+		
+		String fname = null;
+		
+		while(true) {
+			System.out.print("원하는 작업을 선택하세요(0-종료/1-열기/2-저장/3-계좌업무): ");
+			int oper = sc.nextInt();
+			
+			if(oper == 0) {
+				System.out.println("프로그램을 종료합니다.");
+				break;
+			}
+			else if(oper == 1) {
+				System.out.print("파일 이름을 입력하세요: ");
+				fname = sc.next();
+				load(fname, list); // 현재 잔고 현황 출력
+			}
+			else {
+				System.out.print("업데이트할 계좌번호를 입력하세요: ");
+				int acc = sc.nextInt();
+				System.out.print("원하는 계좌 작업을 선택하세요(1-입금/2-출금): ");
+				int accOper = sc.nextInt();
+				
+				if(accOper == 1) {
+					System.out.print("입금액을 입력하세요: ");
+					list.get(acc).deposit(sc.nextInt());
+					System.out.println("입금이 완료되었습니다.");
+				}
+				else {
+					System.out.print("출금액을 입력하세요: ");
+					list.get(acc).withdraw(sc.nextInt());
+					System.out.println("출금이 완료되었습니다.");
+				}
+				load(fname, list);
+			}
+		}
+		
+		sc.close();
+	}
+
+}

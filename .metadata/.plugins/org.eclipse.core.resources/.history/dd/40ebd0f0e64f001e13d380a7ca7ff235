@@ -1,0 +1,23 @@
+import java.util.ArrayList;
+
+public class RandomList<T> {
+	private ArrayList<T> list;
+
+	public RandomList(ArrayList<T> list) {
+		this.list = list;
+	}
+
+	public void add(T item) {
+		list.add(item);
+	}
+	
+	public T selectLast() {
+	}
+	
+	public void print() {
+		System.out.print();
+	}
+	
+	
+		
+}
